@@ -2,6 +2,7 @@ import { Rcon } from "rcon-client";
 import express from "express";
 require("dotenv").config();
 
+const hostname = process.env.API_HOST as string;
 const app = express();
 const port = parseInt(process.env.API_PORT as string);
 const rconHost = process.env.RCON_HOST as string;
@@ -24,4 +25,6 @@ app.get("/player-count", async (req, res) => {
   res.send(result);
 });
 
-app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
+app.listen(port, hostname, () =>
+  console.log(`Listening at http://${hostname}:${port}`)
+);
